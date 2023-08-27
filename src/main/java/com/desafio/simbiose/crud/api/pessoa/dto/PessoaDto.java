@@ -3,7 +3,6 @@ package com.desafio.simbiose.crud.api.pessoa.dto;
 import lombok.*;
 import org.bson.types.ObjectId;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -12,6 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PessoaDto {
+
+    private String id;
 
     private String nome;
 
