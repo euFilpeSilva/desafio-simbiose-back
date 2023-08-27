@@ -4,6 +4,8 @@ import com.desafio.simbiose.crud.api.pessoa.service.PessoaService;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.AtualizarPessoaRequest;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.SalvarPessoaRequest;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.mapper.PessoaMapper;
+import com.desafio.simbiose.crud.exception.BusinessException;
+import com.desafio.simbiose.crud.exception.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,12 @@ public class PessoaController {
     @PutMapping
     public ResponseEntity<String> atualizaPessoa(@RequestBody final AtualizarPessoaRequest request) {
         service.salvaOuAtualizaPessoa(mapper.toDto(request));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> excluirPessoa(@RequestBody final String id) {
+        service.excluirPessoa(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
