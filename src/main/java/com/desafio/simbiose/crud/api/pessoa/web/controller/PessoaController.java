@@ -1,8 +1,9 @@
 package com.desafio.simbiose.crud.api.pessoa.web.controller;
 
-import com.desafio.simbiose.crud.api.pessoa.entity.Pessoa;
+import com.desafio.simbiose.crud.api.pessoa.dto.PessoaDto;
 import com.desafio.simbiose.crud.api.pessoa.service.PessoaService;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.AtualizarPessoaRequest;
+import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.PessoaResponse;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.SalvarPessoaRequest;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.mapper.PessoaMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import static java.util.Objects.nonNull;
 
 @RestController
 @RequestMapping(value = "/pessoa")
@@ -36,23 +39,24 @@ public class PessoaController {
     }
 
     @GetMapping
-    public Page<Pessoa> listarPessoas(Pageable pagina) {
-
-        return service.listarPessoas(pagina);
+    public Page<PessoaResponse> listarPessoas(Pageable pagina) {
+        Page<PessoaDto> pessoasPage = service.listarPessoas(pagina);
+        return pessoasPage.map(mapper::toPessoaResponse);
     }
 
-    @GetMapping("/pessoas/{id}")
-    public ResponseEntity<Pessoa> buscarPessoaPorId(@PathVariable String id) {
-        Pessoa pessoa = service.buscarPorId(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<PessoaResponse> buscarPessoaPorId(@PathVariable String id) {
+        PessoaDto pessoaDto = service.buscarPorId(id);
 
-        if (pessoa != null) {
-            return ResponseEntity.ok(pessoa);
+        if (nonNull(pessoaDto)) {
+            PessoaResponse pessoaResponse = mapper.toPessoaResponse(pessoaDto);
+            return ResponseEntity.ok(pessoaResponse);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/pessoas/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPessoaPorId(@PathVariable String id) {
         service.deletarPorId(id);
         return ResponseEntity.noContent().build();

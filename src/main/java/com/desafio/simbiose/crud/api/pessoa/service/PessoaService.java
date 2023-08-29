@@ -30,16 +30,17 @@ public class PessoaService {
         }
     }
 
-    public Page<Pessoa> listarPessoas(Pageable page) {
-
-        return repository.findAll(page);
+    public Page<PessoaDto> listarPessoas(Pageable page) {
+        Page<Pessoa> pessoasPage = repository.findAll(page);
+        return pessoasPage.map(mapper::toPessoaDto);
     }
 
-    public Pessoa buscarPorId(String id) {
+    public PessoaDto buscarPorId(String id) {
         Optional<Pessoa> pessoaOptional = repository.findById(id);
 
         if (pessoaOptional.isPresent()) {
-            return pessoaOptional.get();
+            Pessoa pessoa = pessoaOptional.get();
+            return mapper.toPessoaDto(pessoa);
         } else {
             throw new BusinessException("Pessoa não encontrada na base de dados");
         }
