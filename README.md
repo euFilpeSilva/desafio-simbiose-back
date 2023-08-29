@@ -21,8 +21,9 @@ Outras bibliotecas ou tecnologias listadas no pom.xml
   git clone https://github.com/euFilpeSilva/desafio-simbiose-back.git
 
   #### Configuração do Banco de Dados:
-  - Certifique-se de ter um servidor MongoDB em execução e configure a conexão no arquivo application.properties:
+  - configure a conexão no arquivo application.properties:
    -  spring.data.mongodb.uri=sua_string_de_conexão
+   -  spring.data.mongodb.database=nome_database
 
 #### Execução do Projeto: Navegue até o diretório do projeto e execute-o usando o Maven: 
   - cd desafio-simbiose-back
