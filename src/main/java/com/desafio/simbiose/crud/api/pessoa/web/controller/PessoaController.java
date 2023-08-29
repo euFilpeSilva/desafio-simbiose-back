@@ -1,12 +1,13 @@
 package com.desafio.simbiose.crud.api.pessoa.web.controller;
 
+import com.desafio.simbiose.crud.api.pessoa.entity.Pessoa;
 import com.desafio.simbiose.crud.api.pessoa.service.PessoaService;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.AtualizarPessoaRequest;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.SalvarPessoaRequest;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.mapper.PessoaMapper;
-import com.desafio.simbiose.crud.exception.BusinessException;
-import com.desafio.simbiose.crud.exception.ErrorResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -39,4 +40,11 @@ public class PessoaController {
         service.excluirPessoa(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping
+    public Page<Pessoa> listarPessoas(Pageable pagina) {
+
+        return service.listarPessoas(pagina);
+    }
+
 }
