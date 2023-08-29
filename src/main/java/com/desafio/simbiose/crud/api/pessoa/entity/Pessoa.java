@@ -14,7 +14,7 @@ import java.util.Date;
 public class Pessoa {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private String nome;
 

@@ -35,16 +35,26 @@ public class PessoaController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> excluirPessoa(@RequestBody final String id) {
-        service.excluirPessoa(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @GetMapping
     public Page<Pessoa> listarPessoas(Pageable pagina) {
 
         return service.listarPessoas(pagina);
     }
 
+    @GetMapping("/pessoas/{id}")
+    public ResponseEntity<Pessoa> buscarPessoaPorId(@PathVariable String id) {
+        Pessoa pessoa = service.buscarPorId(id);
+
+        if (pessoa != null) {
+            return ResponseEntity.ok(pessoa);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/pessoas/{id}")
+    public ResponseEntity<Void> deletarPessoaPorId(@PathVariable String id) {
+        service.deletarPorId(id);
+        return ResponseEntity.noContent().build();
+    }
 }

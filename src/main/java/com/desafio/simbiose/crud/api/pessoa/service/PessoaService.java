@@ -6,7 +6,6 @@ import com.desafio.simbiose.crud.api.pessoa.repository.PessoaRepository;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.mapper.PessoaMapper;
 import com.desafio.simbiose.crud.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -31,24 +30,22 @@ public class PessoaService {
         }
     }
 
-    public void excluirPessoa(final String id) {
-
-        Optional<Pessoa> pessoaOptional;
-        try {
-            pessoaOptional = repository.findById(new ObjectId(id));
-        } catch (Exception e) {
-            pessoaOptional = Optional.empty();
-        }
-
-        if (pessoaOptional.isEmpty()) {
-            throw new BusinessException("Registro não localizado no banco");
-        }
-
-        pessoaOptional.ifPresent(repository::delete);
-    }
-
     public Page<Pessoa> listarPessoas(Pageable page) {
 
         return repository.findAll(page);
+    }
+
+    public Pessoa buscarPorId(String id) {
+        Optional<Pessoa> pessoaOptional = repository.findById(id);
+
+        if (pessoaOptional.isPresent()) {
+            return pessoaOptional.get();
+        } else {
+            throw new BusinessException("Pessoa não encontrada na base de dados");
+        }
+    }
+
+    public void deletarPorId(String id) {
+        repository.deleteById(id);
     }
 }
