@@ -4,6 +4,7 @@ import com.desafio.simbiose.crud.api.pessoa.dto.PessoaDto;
 import com.desafio.simbiose.crud.api.pessoa.service.PessoaService;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.PessoaController;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.AtualizarPessoaRequest;
+import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.PessoaResponse;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.domain.SalvarPessoaRequest;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.mapper.PessoaMapper;
 import org.junit.jupiter.api.Test;
@@ -11,10 +12,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -74,6 +80,23 @@ public class PessoaControllerTest {
         ResponseEntity<String> responseEntity = pessoaController.atualizaPessoa(request);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }
+
+    @Test
+    void testListarPessoas() {
+
+        PessoaController pessoaController = new PessoaController(service, mapper);
+
+        Pageable pageable = Pageable.unpaged();
+
+        List<PessoaDto> pessoaDtos = new ArrayList<>();
+        Page<PessoaDto> pessoaDtoPage = new PageImpl<>(pessoaDtos, pageable, pessoaDtos.size());
+
+        when(service.listarPessoas(pageable)).thenReturn(pessoaDtoPage);
+
+        Page<PessoaResponse> responsePage = pessoaController.listarPessoas(pageable);
+
+        assertEquals(pessoaDtos.size(), responsePage.getTotalElements());
     }
 }
 

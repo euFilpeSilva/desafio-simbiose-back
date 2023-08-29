@@ -10,9 +10,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -45,7 +51,7 @@ public class PessoaServiceTest {
 
     @Test
     void testAtualizar() {
-        // Arrange
+
         PessoaDto pessoaDto = new PessoaDto();
         pessoaDto.setNome("Novo teste");
         pessoaDto.setEmail("teste2@example.com");
@@ -56,10 +62,23 @@ public class PessoaServiceTest {
         when(pessoaMapper.toDtoPessoa(any(PessoaDto.class))).thenReturn(new Pessoa());
         when(pessoaRepository.save(any(Pessoa.class))).thenReturn(new Pessoa());
 
-        // Act
         pessoaService.salvaOuAtualizaPessoa(pessoaDto);
 
-        // Assert
         verify(pessoaRepository, times(1)).save(any(Pessoa.class));
+    }
+
+    @Test
+    void testListarPessoas() {
+
+        Pageable pageable = Pageable.unpaged();
+
+        List<Pessoa> pessoas = new ArrayList<>();
+        Page<Pessoa> pessoaPage = new PageImpl<>(pessoas, pageable, pessoas.size());
+
+        when(pessoaRepository.findAll(pageable)).thenReturn(pessoaPage);
+
+        Page<PessoaDto> pessoaDtoPage = pessoaService.listarPessoas(pageable);
+
+        assertEquals(pessoas.size(), pessoaDtoPage.getTotalElements());
     }
 }
