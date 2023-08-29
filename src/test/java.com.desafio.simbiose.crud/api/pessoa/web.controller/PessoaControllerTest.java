@@ -98,6 +98,30 @@ public class PessoaControllerTest {
 
         assertEquals(pessoaDtos.size(), responsePage.getTotalElements());
     }
+
+    @Test
+    void testBuscarPessoaPorId() {
+
+        String id = "2";
+
+        PessoaDto pessoaDto = new PessoaDto();
+        pessoaDto.setId("5265gtg");
+        pessoaDto.setNome("Att");
+        pessoaDto.setEmail("aleatorio@example.com");
+
+        when(service.buscarPorId(id)).thenReturn(pessoaDto);
+
+        PessoaResponse pessoaResponse = new PessoaResponse();
+        pessoaResponse.setId("5265gtg");
+        pessoaResponse.setNome("Nome fantasia");
+        pessoaResponse.setEmail("aleatorio@example.com");
+
+        when(mapper.toPessoaResponse(pessoaDto)).thenReturn(pessoaResponse);
+
+        ResponseEntity<PessoaResponse> responseEntity = pessoaController.buscarPessoaPorId(id);
+
+        assertEquals(pessoaResponse, responseEntity.getBody());
+    }
 }
 
 

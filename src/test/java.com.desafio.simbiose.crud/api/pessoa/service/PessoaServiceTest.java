@@ -5,6 +5,7 @@ import com.desafio.simbiose.crud.api.pessoa.entity.Pessoa;
 import com.desafio.simbiose.crud.api.pessoa.repository.PessoaRepository;
 import com.desafio.simbiose.crud.api.pessoa.service.PessoaService;
 import com.desafio.simbiose.crud.api.pessoa.web.controller.mapper.PessoaMapper;
+import com.desafio.simbiose.crud.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,8 +18,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import static com.mongodb.assertions.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -80,5 +84,36 @@ public class PessoaServiceTest {
         Page<PessoaDto> pessoaDtoPage = pessoaService.listarPessoas(pageable);
 
         assertEquals(pessoas.size(), pessoaDtoPage.getTotalElements());
+    }
+
+    @Test
+    void testBuscarPorId_PessoaEncontrada() {
+        // Arrange
+        String id = "5";
+
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId("2");
+        pessoa.setNome("Novo teste");
+        pessoa.setEmail("teste2@example.com");
+        pessoa.setNascimento(new Date());
+
+        when(pessoaRepository.findById(id)).thenReturn(Optional.of(pessoa));
+
+        PessoaDto pessoaDto = new PessoaDto();
+        when(pessoaMapper.toPessoaDto(pessoa)).thenReturn(pessoaDto);
+
+        PessoaDto result = pessoaService.buscarPorId(id);
+
+        assertNotNull(result);
+    }
+
+    @Test
+    void testBuscarPorId_PessoaNaoEncontrada() {
+
+        String id = "635f3190669cc07be7b57f50";
+
+        when(pessoaRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(BusinessException.class, () -> pessoaService.buscarPorId(id));
     }
 }

@@ -1,14 +1,14 @@
 package com.desafio.simbiose.crud.api.pessoa.web.controller.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PessoaResponse {
 
     private String id;
