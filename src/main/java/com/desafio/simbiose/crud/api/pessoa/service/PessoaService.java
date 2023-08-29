@@ -19,7 +19,7 @@ public class PessoaService {
 
     private static final String NOT_FOUND = "Dados não encontrados na base de dados";
     private static final String NOT_DELETE = "Falha na execução da operação";
-    private static final String NOT_SALV = "Erro ao salvar ou atualizar a pessoa.";
+    private static final String NOT_SALVE = "Erro ao salvar ou atualizar a pessoa.";
 
     private final PessoaRepository repository;
 
@@ -34,7 +34,7 @@ public class PessoaService {
                 repository.save(mapper.toDtoPessoa(dto));
             }
         } catch (Exception e) {
-            throw new BusinessException(NOT_SALV);
+            throw new BusinessException(NOT_SALVE);
         }
     }
 
