@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.mongodb.assertions.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -121,6 +122,20 @@ public class PessoaControllerTest {
         ResponseEntity<PessoaResponse> responseEntity = pessoaController.buscarPessoaPorId(id);
 
         assertEquals(pessoaResponse, responseEntity.getBody());
+    }
+
+    @Test
+    void testDeletarPessoaPorId() {
+
+        String id = "f48fe9f4";
+
+        doNothing().when(service).deletarPorId(id);
+
+        ResponseEntity<Void> responseEntity = pessoaController.deletarPessoaPorId(id);
+
+        assertNotNull(responseEntity);
+        assertEquals(204, responseEntity.getStatusCodeValue());
+        verify(service, times(1)).deletarPorId(id);
     }
 }
 

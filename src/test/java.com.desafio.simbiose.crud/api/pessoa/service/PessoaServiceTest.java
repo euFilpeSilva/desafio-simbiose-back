@@ -116,4 +116,14 @@ public class PessoaServiceTest {
 
         assertThrows(BusinessException.class, () -> pessoaService.buscarPorId(id));
     }
+
+    @Test
+    void testDeletarPessoaPorId() {
+        String id = "f48fe9f4";
+
+        pessoaService.deletarPorId(id);
+
+        verify(pessoaRepository, times(1)).deleteById(id);
+    }
+
 }
