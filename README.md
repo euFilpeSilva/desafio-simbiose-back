@@ -40,7 +40,14 @@ A aplicação back-end disponibiliza uma API que permite buscar, atualizar, cada
 - Exemplos de ferramentas que podem ser utilizadas pra testar a API: Postman ou Insomnia.
 
 - Registro: [POST] http://localhost:8080/pessoa
+
+   ![image](https://github.com/euFilpeSilva/desafio-simbiose-back/assets/79103757/8ebddf3f-a064-4648-9aef-3a7d2d2bbe4d)
+
 - Atualizar: [PUT] http://localhost:8080/pessoa
+
+  ![image](https://github.com/euFilpeSilva/desafio-simbiose-back/assets/79103757/d2ef5d09-866a-4d52-84ec-45acb0f7a454)
+
+
 - Listar: [GET] http://localhost:8080/pessoa?page=0&size=3
 - Listar por id: [GET] http://localhost:8080/pessoa/64eba46271bebc6b7a36573a
 - Deletar: [DELETE] http://localhost:8080/pessoa/64eba46271bebc6b7a36573a
