@@ -53,7 +53,7 @@ A aplicação back-end disponibiliza uma API que permite buscar, atualizar, cada
 - Deletar: [DELETE] http://localhost:8080/pessoa/64eba46271bebc6b7a36573a
 
 #### Estrutura do Projeto
-- Usei como base o padrão MVC, sempre separando bem as responsabilidades de cada pacote, garantindo assim um baixo acoplamento e facil entendimento da estrutura como um todo.
+- Usei como base o padrão MVC, sempre separando bem as responsabilidades de cada camada, garantindo assim um baixo acoplamento e facil entendimento da estrutura como um todo.
 
 ![image](https://github.com/euFilpeSilva/desafio-simbiose-back/assets/79103757/d34662a8-076d-43f0-ae4c-14db52a6b416)
 
