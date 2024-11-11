@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start" type="Application" factoryName="Application">
+    <envs>
+      <env name="MONGO_PASS" value="w1q5xo0Blbd2CF0S" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.desafio.simbiose.crud.CrudApplication" />
+    <module name="crud" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

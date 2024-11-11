@@ -29,5 +29,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignorar arquivos de variáveis de ambiente
+.env
+
 ### VS Code ###
 .vscode/
