@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="bb882ca5-1155-4eaa-90fc-ce903d0bcb26" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio-simbiose-back/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-back/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/src/components/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/src/components/Form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/src/components/Modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/src/components/Modal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/src/services/userService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/src/services/userService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desafio-simbiose-front/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/desafio-simbiose-front/tsconfig.app.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +73,7 @@
       <updated>1731352576017</updated>
       <workItem from="1731352577048" duration="16000" />
       <workItem from="1731352616810" duration="8000" />
-      <workItem from="1731352636444" duration="1245000" />
+      <workItem from="1731352636444" duration="4746000" />
     </task>
     <servers />
   </component>
