@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
+  display: none;
 }
 
 @keyframes balloon-in {
@@ -68,7 +68,7 @@
 }
 
 .transition-all {
-  transition: all 2s cubic-bezier(0.42, 0, 0.58, 1); /* Adjusted cubic-bezier for smoother transition */
+  transition: all 2s cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 @keyframes slide-up-full {
@@ -139,12 +139,4 @@
   to {
     transform: translateX(-100%);
   }
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
-}
-
-.animate-slide-out-left {
-  animation: slide-out-left 0.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
 }

@@ -55,16 +55,18 @@ const ListaPessoas = ({ onEdit, onDelete }: ListaPessoasProps) => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                     {pessoas.map((pessoa, index) => (
-                        <tr key={pessoa.id} className={index === pessoas.length  - 1 ? 'border-b last:border-b' : 'border-b'}>
-                            <td className="py-2 px-4 border-b">{pessoa.nome}</td>
+                        <tr key={pessoa.id}
+                            className={index === pessoas.length - 1 ? 'border-b last:border-b' : 'border-b'}>
+                            <td className="py-2 px-4 border-b whitespace-nowrap">{pessoa.nome}</td>
                             <td className="py-2 px-4 border-b">{pessoa.email}</td>
                             <td className="py-2 px-4 border-b">{format(new Date(pessoa.nascimento), 'dd/MM/yyyy')}</td>
                             <td className="py-4 px-4 flex gap-2">
-                            <button onClick={() => onEdit && onEdit(pessoa)} className="text-blue-500 hover:text-blue-700">
-                                    <FaEdit />
+                                <button onClick={() => onEdit && onEdit(pessoa)}
+                                        className="text-blue-500 hover:text-blue-700">
+                                    <FaEdit/>
                                 </button>
                                 <button onClick={() => onDelete(pessoa)} className="text-red-500 hover:text-red-700">
-                                    <FaTrash />
+                                    <FaTrash/>
                                 </button>
                             </td>
                         </tr>

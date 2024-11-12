@@ -14,6 +14,7 @@ const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
         email: "",
         nascimento: ""
     });
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (initialData) {
@@ -26,13 +27,24 @@ const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
         setFormData({...formData, [name]: value});
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(formData);
+        setLoading(true);
+        try {
+            await onSubmit(formData);
+            setFormData({
+                id: 0,
+                nome: "",
+                email: "",
+                nascimento: ""
+            });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col bg-white p-4 rounded w-full mx-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col bg-white p-4 rounded w-full mx-auto mt-12">
             <h1 className="text-xl font-bold mb-4">Cadastro</h1>
             <div className="flex flex-col md:flex-row mb-4 gap-3.5 items-center">
                 <div className="w-full md:w-1/3 mb-4 md:mb-0">
@@ -46,6 +58,7 @@ const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
                         onChange={handleChange}
                         className="w-full px-3 py-2 border rounded"
                         required
+                        disabled={loading}
                     />
                 </div>
                 <div className="w-full md:w-1/3 mb-4 md:mb-0">
@@ -59,6 +72,7 @@ const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
                         onChange={handleChange}
                         className="w-full px-3 py-2 border rounded"
                         required
+                        disabled={loading}
                     />
                 </div>
                 <div className="w-full md:w-1/6 mb-4 md:mb-0 mr-auto">
@@ -72,11 +86,13 @@ const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
                         onChange={handleChange}
                         className="w-full px-3 py-2 border rounded"
                         required
+                        disabled={loading}
                     />
                 </div>
                 <div className="flex justify-end items-center w-full md:w-auto mt-5">
                     <button type="submit"
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            className="bg-neutral-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded"
+                            disabled={loading}>
                         {isEditMode ? "Atualizar" : "Salvar"}
                     </button>
                 </div>
