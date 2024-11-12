@@ -50,6 +50,11 @@ function App() {
         setIsEditModalOpen(true);
     };
 
+    const handleDeleteClick = (pessoa: PessoaResponse) => {
+        setSelectedPessoa(pessoa);
+        setIsDeleteModalOpen(true);
+    };
+
     const handleFormSubmit = async (data: PessoaResponse) => {
         try {
             if (isEditMode && selectedPessoa) {
@@ -84,7 +89,7 @@ function App() {
             <div className="w-11/12 flex flex-col items-center gap-4">
                     <Form onSubmit={handleFormSubmit} isEditMode={isEditMode}/>
                 <div className={`w-full bg-white p-4 rounded shadow-2xl transition-all duration-500 ${isListVisible ? 'block' : 'hidden'} md:block`}>
-                    <ListaPessoas key={listKey} pessoas={pessoas} loading={loading} error={error} onDelete={() => {}} onEdit={handleEditClick} />
+                    <ListaPessoas key={listKey} pessoas={pessoas} loading={loading} error={error} onDelete={handleDeleteClick} onEdit={handleEditClick} />
                 </div>
             </div>
             <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} title="Editar Pessoa">

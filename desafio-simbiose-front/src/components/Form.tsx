@@ -33,6 +33,7 @@ const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col bg-white p-4 rounded w-full mx-auto">
+            <h1 className="text-xl font-bold mb-4">Cadastro</h1>
             <div className="flex flex-col md:flex-row mb-4 gap-3.5 items-center">
                 <div className="w-full md:w-1/3 mb-4 md:mb-0">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nome">
