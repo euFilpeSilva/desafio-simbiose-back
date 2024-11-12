@@ -4,13 +4,14 @@ import Form from "./components/Form.tsx";
 import Modal from "./components/Modal.tsx";
 import ListaPessoas from "./components/Listagem.tsx";
 import { PessoaResponse } from "./types/Pessoa-response.tsx";
-import { deletarPessoa, salvarPessoa, listarPessoas } from "./services/userService.tsx";
+import {deletarPessoa, salvarPessoa, listarPessoas, editarPessoa} from "./services/userService.tsx";
+import EditForm from "./components/EditForm.tsx";
 
 function App() {
-    const [selectedPessoa] = useState<PessoaResponse | null>(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+    const [selectedPessoa, setSelectedPessoa] = useState<PessoaResponse | null>(null);
     const [isListVisible, setIsListVisible] = useState(false);
     const [pessoas, setPessoas] = useState<PessoaResponse[]>([]);
     const [loading, setLoading] = useState(false);
@@ -43,15 +44,27 @@ function App() {
         }
     };
 
+    const handleEditClick = (pessoa: PessoaResponse) => {
+        setSelectedPessoa(pessoa);
+        setIsEditMode(true);
+        setIsEditModalOpen(true);
+    };
+
     const handleFormSubmit = async (data: PessoaResponse) => {
         try {
-            await salvarPessoa(data);
+            if (isEditMode && selectedPessoa) {
+                await editarPessoa(data);
+            } else {
+                await salvarPessoa(data);
+            }
             setFeedbackMessage("Dados salvos com sucesso!");
             await fetchPessoas();
         } catch (error) {
             setFeedbackMessage("Erro ao salvar os dados.");
         }
         setTimeout(() => setFeedbackMessage(null), 3000);
+        setIsEditModalOpen(false);
+        setIsEditMode(false);
     };
 
     const toggleListVisibility = () => {
@@ -71,12 +84,12 @@ function App() {
             <div className="w-11/12 flex flex-col items-center gap-4">
                     <Form onSubmit={handleFormSubmit} isEditMode={isEditMode}/>
                 <div className={`w-full bg-white p-4 rounded shadow-2xl transition-all duration-500 ${isListVisible ? 'block' : 'hidden'} md:block`}>
-                    <ListaPessoas key={listKey} pessoas={pessoas} loading={loading} error={error} onDelete={() => {}} />
+                    <ListaPessoas key={listKey} pessoas={pessoas} loading={loading} error={error} onDelete={() => {}} onEdit={handleEditClick} />
                 </div>
             </div>
             <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} title="Editar Pessoa">
                 {selectedPessoa && (
-                    <Form initialData={selectedPessoa} onSubmit={salvarPessoa} isEditMode={true} />
+                    <EditForm initialData={selectedPessoa} onSubmit={handleFormSubmit} />
                 )}
             </Modal>
             <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Confirmar Deleção">

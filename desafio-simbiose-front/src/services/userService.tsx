@@ -32,8 +32,8 @@ export const listarPessoas = async (page: number, size: number): Promise<Page<Pe
     return response.json();
 };
 
-export const editarPessoa = async (id: number, data: User): Promise<void> => {
-    const response = await fetch(`${API_URL}/${id}`, {
+export const editarPessoa = async (data: User): Promise<void> => {
+    const response = await fetch(`${API_URL}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

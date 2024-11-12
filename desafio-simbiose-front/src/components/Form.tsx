@@ -7,7 +7,7 @@ interface FormProps {
     isEditMode?: boolean;
 }
 
-const Form = ({initialData, onSubmit, isEditMode = false}: FormProps) => {
+const Form = ({initialData, onSubmit, isEditMode}: FormProps) => {
     const [formData, setFormData] = useState<PessoaResponse>(initialData || {
         id: 0,
         nome: "",
@@ -32,7 +32,7 @@ const Form = ({initialData, onSubmit, isEditMode = false}: FormProps) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col bg-white p-4 rounded shadow-2xl w-full mx-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col bg-white p-4 rounded w-full mx-auto">
             <div className="flex flex-col md:flex-row mb-4 gap-3.5 items-center">
                 <div className="w-full md:w-1/3 mb-4 md:mb-0">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nome">
