@@ -42,25 +42,25 @@ const ListaPessoas = ({ onEdit, onDelete }: ListaPessoasProps) => {
 
     return (
         <div className="w-full mx-auto">
-            <h1 className="text-xl font-bold mb-4">Lista de Cadastrados</h1>
+            <h1 className="text-xl font-bold mb-4 text-center">Lista de Cadastrados</h1>
             <div className="overflow-x-auto scrollbar-hide rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                     <tr>
-                        <th className="py-2 px-4 border-b">Nome</th>
-                        <th className="py-2 px-4 border-b">E-mail</th>
-                        <th className="py-2 px-4 border-b">Nascimento</th>
-                        <th className="py-2 px-4 border-b">Ações</th>
+                        <th className="py-2 px-4 border-b text-center">Nome</th>
+                        <th className="py-2 px-4 border-b text-center">E-mail</th>
+                        <th className="py-2 px-4 border-b text-center">Nascimento</th>
+                        <th className="py-2 px-4 border-b text-center">Ações</th>
                     </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                     {pessoas.map((pessoa, index) => (
                         <tr key={pessoa.id}
                             className={index === pessoas.length - 1 ? 'border-b last:border-b' : 'border-b'}>
-                            <td className="py-2 px-4 border-b whitespace-nowrap">{pessoa.nome}</td>
-                            <td className="py-2 px-4 border-b">{pessoa.email}</td>
-                            <td className="py-2 px-4 border-b">{format(new Date(pessoa.nascimento), 'dd/MM/yyyy')}</td>
-                            <td className="py-4 px-4 flex gap-2">
+                            <td className="py-2 px-4 border-b text-center whitespace-nowrap">{pessoa.nome}</td>
+                            <td className="py-2 px-4 border-b text-center">{pessoa.email}</td>
+                            <td className="py-2 px-4 border-b text-center">{format(new Date(pessoa.nascimento), 'dd/MM/yyyy')}</td>
+                            <td className="py-4 px-4 flex gap-2 justify-center">
                                 <button onClick={() => onEdit && onEdit(pessoa)}
                                         className="text-blue-500 hover:text-blue-700">
                                     <FaEdit/>
